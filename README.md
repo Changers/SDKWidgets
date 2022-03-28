@@ -40,7 +40,3 @@ window.customElements.define('hello-world', HelloWorld);
 ```
 
 If there are any dependencies, they should be bundled together with the custom element in the javascript file, preferably using webpack.
-
-# Testing
-
-To test 
