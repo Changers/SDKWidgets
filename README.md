@@ -9,14 +9,14 @@ Web components allows you to build your own custom html element. These html elem
 
 In this repository, we will provide some example widgets, document the API interfaces, and define the workflow you can use to test & publish your widgets inside Changers City app. 
 
-# Building Webcompoments 
+# Building WebComponents
 
 Web components can be build using either valila javascript or using one of open source frameworks available. 
 Currently we are recomending building webcomponents using https://lit.dev/
 
 `examples` directory contains some example widgets built using LitElement library.
 
-# Bundling Webcompoments
+# Bundling WebComponents
 We require a single javascript file, which contains web compoment class. The JS file should register the given component.
 For example using valila javascript: 
 ```
