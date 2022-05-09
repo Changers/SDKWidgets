@@ -72,7 +72,7 @@ If there are any dependencies, they should be bundled together with the custom e
 After you have bundled your code in a single javascript file, you can test your widget inside Changers City app using the following steps:
 * Obtain app identifier, client id and client secret by contacting Changers
 * Upload your bundled javascript file on a http server or create a temporary http server in your local. If you are using npm you can use package similar to `@web/dev-server` or `http-server`
-* Open `https://sdk.changers.com` in browser
+* Open https://sdk.maroshi.de in browser
 * Open devtools, switch to mobile view and enter this in console: 
 ```
 window.initWidgets(app, clientId, clientSecret)
