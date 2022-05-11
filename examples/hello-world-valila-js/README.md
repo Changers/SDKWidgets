@@ -1,6 +1,6 @@
 # Setup
 * `git clone https://github.com/Changers/SDKWidgets`
-* `cd examples/hello-world-lit-js`
+* `cd examples/hello-world-valila-js`
 * `npm install`
 * `npm install http-server -g`
 * `http-server -p 8082 ./`
