@@ -92,7 +92,6 @@ registerWidget('hello-world', 'http://127.0.0.1:8082/hello-world.js', 'after-tok
         * `after-co2-savings`
         * `after-team-leaderboards`
         * `after-invite-friends`
-        * `marketplace`
 
 
 
