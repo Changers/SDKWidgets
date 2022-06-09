@@ -2,6 +2,7 @@
 * `git clone https://github.com/Changers/SDKWidgets`
 * `cd examples/hello-world-lit-js`
 * `npm install`
+* `npm run build`
 * `npm run start`
 
 # Test
