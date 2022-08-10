@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
   class HelloWorld extends HTMLElement {
     constructor() {
       // establish prototype chain
@@ -8,7 +8,7 @@
 
       // attaches shadow tree and returns shadow root reference
       // https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow
-      const shadow = this.attachShadow({ mode: 'open' });
+      const shadow = this.attachShadow({mode: 'open'});
 
       this._user = {};
       this._api = {};
@@ -25,6 +25,9 @@
         <button class="increment">increment</button>
         <button class="open-full-screen">Open full screen</button>
         <button class="close-full-screen">Close full screen</button>
+        <br/>
+        <button class="location">Get current location</button>
+        <button class="qr-code">Scan QR code</button>
       `;
 
       // appending the container to the shadow DOM
@@ -33,25 +36,51 @@
 
     // fires after the element has been attached to the DOM
     connectedCallback() {
-      console.log("connectedCallback", this.shadowRoot, this, this.user)
+      console.log('connectedCallback', this.shadowRoot, this, this.user);
 
       const incrementButton = this.shadowRoot.querySelector('.increment');
 
       let self = this;
 
-      incrementButton.addEventListener('click', function(e) {
-        console.log("addEventListener", self.shadowRoot, self, self.user)
+      incrementButton.addEventListener(
+        'click',
+        function (e) {
+          console.log('addEventListener', self.shadowRoot, self, self.user);
 
-        self._counter ++;
+          self._counter++;
 
-        self.update()
-      }, false);
+          self.update();
+        },
+        false,
+      );
 
-      const openFullScreenButton = this.shadowRoot.querySelector('.open-full-screen');
-      openFullScreenButton.addEventListener('click', () => self.api.openFullScreen())
+      const openFullScreenButton = this.shadowRoot.querySelector(
+        '.open-full-screen',
+      );
+      openFullScreenButton.addEventListener('click', () =>
+        self.api.openFullScreen('Full screen title'),
+      );
 
-      const closeFullScreenButton = this.shadowRoot.querySelector('.close-full-screen');
-      closeFullScreenButton.addEventListener('click', () => self.api.closeFullScreen())
+      const closeFullScreenButton = this.shadowRoot.querySelector(
+        '.close-full-screen',
+      );
+      closeFullScreenButton.addEventListener('click', () =>
+        self.api.closeFullScreen(),
+      );
+
+      const locationButton = this.shadowRoot.querySelector('.location');
+      locationButton.addEventListener('click', async () => {
+        console.log('Getting location ....');
+        const currentLocation = await self.api.getCurrentLocation();
+        console.log('Current location: ', currentLocation);
+      });
+
+      const qrCodeButton = this.shadowRoot.querySelector('.qr-code');
+      qrCodeButton.addEventListener('click', async () => {
+        console.log('Scanning QR code ...');
+        const qrCode = await self.api.scanQRCode();
+        console.log('QR Code: ', qrCode);
+      });
     }
 
     update() {
