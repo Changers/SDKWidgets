@@ -268,7 +268,7 @@ class OpenWidgets {
           app: {
             textColor: '#000000',
             bgColor: '#C0E4E8',
-            headerBgColor: '#007D8A',
+            navBgColor: '#007D8A',
             fontFamily: 'Roboto',
             fontSize: '18px',
             fontWeight: '400',
