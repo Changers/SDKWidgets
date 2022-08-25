@@ -12,6 +12,7 @@
 
       this._user = {};
       this._api = {};
+      this._theme = {};
       this._counter = 0;
 
       // creating a container for the editable-list component
@@ -57,14 +58,16 @@
         false,
       );
 
-      const openFullScreenButton =
-        this.shadowRoot.querySelector('.open-full-screen');
+      const openFullScreenButton = this.shadowRoot.querySelector(
+        '.open-full-screen',
+      );
       openFullScreenButton.addEventListener('click', () =>
         self.api.openFullScreen({title: 'Full screen title'}),
       );
 
-      const closeFullScreenButton =
-        this.shadowRoot.querySelector('.close-full-screen');
+      const closeFullScreenButton = this.shadowRoot.querySelector(
+        '.close-full-screen',
+      );
       closeFullScreenButton.addEventListener('click', () =>
         self.api.closeFullScreen(),
       );
@@ -102,6 +105,15 @@
 
     get user() {
       return this._user;
+    }
+
+    set theme(value) {
+      this._theme = value;
+      this.update();
+    }
+
+    get theme() {
+      return this._theme;
     }
 
     set api(value) {
