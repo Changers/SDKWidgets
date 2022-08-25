@@ -40,7 +40,7 @@ export type OpenWidgetTheme = {
       secondary: string;
     };
     components: {
-      app: {headerColor: string} & BaseComponent;
+      app: {headerBgColor: string} & BaseComponent;
       widget: {
         title: BaseComponent;
         body: BaseComponent;
