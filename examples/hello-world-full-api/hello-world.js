@@ -19,15 +19,15 @@
 
       // creating the inner HTML of the editable list element
       container.innerHTML = `
-        <h2>Hello, User #<span class="user-id">${this.userId}</span>!</h2>
-        <h5>Balance: <span class="balance">${this.balance}</span></h5>
-        <h5>Counter: <span class="counter">${this.counter}</span></h5>
-        <button class="increment">increment</button>
-        <button class="open-full-screen">Open full screen</button>
-        <button class="close-full-screen">Close full screen</button>
+        <h2>Hello, User #<span class='user-id'>${this.userId}</span>!</h2>
+        <h5>Balance: <span class='balance'>${this.balance}</span></h5>
+        <h5>Counter: <span class='counter'>${this.counter}</span></h5>
+        <button class='increment'>increment</button>
+        <button class='open-full-screen'>Open full screen</button>
+        <button class='close-full-screen'>Close full screen</button>
         <br/>
-        <button class="location">Get current location</button>
-        <button class="qr-code">Scan QR code</button>
+        <button class='location'>Get current location</button>
+        <button class='qr-code'>Scan QR code</button>
       `;
 
       // appending the container to the shadow DOM
@@ -36,7 +36,13 @@
 
     // fires after the element has been attached to the DOM
     connectedCallback() {
-      console.log('connectedCallback', this.shadowRoot, this, this.user);
+      console.log(
+        'connectedCallback',
+        this.shadowRoot,
+        this,
+        this.user,
+        this.theme,
+      );
 
       const incrementButton = this.shadowRoot.querySelector('.increment');
 
@@ -45,25 +51,20 @@
       incrementButton.addEventListener(
         'click',
         function (e) {
-          console.log('addEventListener', self.shadowRoot, self, self.user);
-
           self._counter++;
-
           self.update();
         },
         false,
       );
 
-      const openFullScreenButton = this.shadowRoot.querySelector(
-        '.open-full-screen',
-      );
+      const openFullScreenButton =
+        this.shadowRoot.querySelector('.open-full-screen');
       openFullScreenButton.addEventListener('click', () =>
-        self.api.openFullScreen('Full screen title'),
+        self.api.openFullScreen({title: 'Full screen title'}),
       );
 
-      const closeFullScreenButton = this.shadowRoot.querySelector(
-        '.close-full-screen',
-      );
+      const closeFullScreenButton =
+        this.shadowRoot.querySelector('.close-full-screen');
       closeFullScreenButton.addEventListener('click', () =>
         self.api.closeFullScreen(),
       );

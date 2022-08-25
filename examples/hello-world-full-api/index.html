@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang='en-GB'>
 <head>
-    <meta charset="utf-8">
-    <style>
-        body {
-            background: #fafafa;
-        }
-    </style>
-    <script src="./hello-world.js"></script>
-    <link href="../../lib/open-widgets.css" rel="stylesheet">
-    <script src="../../lib/open-widgets.js"></script>
+  <meta charset='utf-8'>
+  <style>
+      body {
+          background: #fafafa;
+      }
+  </style>
+  <script src='./hello-world.js'></script>
+  <link href='../../dist/open-widgets.css' rel='stylesheet'>
+  <script src='../../dist/open-widgets.js'></script>
 </head>
 <body>
-<div id="root"></div>
+<div id='root'></div>
 </body>
 <script>
   window.openWidgets.init({
@@ -24,13 +24,16 @@
       },
       {
         name: 'hello-world',
-        position: 'after-tree-planting',
-      },
-      {
-        name: 'hello-world',
         position: 'after-token',
       },
-    ]
-  })
+    ],
+    authData: {
+      app: 'sdksample',
+      clientId: 19,
+      clientSecret: 'secret',
+      env: 'stage',
+      uuid: 'uuid',
+    },
+  });
 </script>
 </html>

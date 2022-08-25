@@ -1,0 +1,48 @@
+{
+  "name": "sdkwidgets",
+  "version": "1.0.0",
+  "description": "Changers City SDK allows partners to build their own interactive UI widgets which can be embedded inside  Changers City app.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Changers/SDKWidgets.git"
+  },
+  "keywords": [],
+  "author": "@kingstuffy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Changers/SDKWidgets/issues"
+  },
+  "homepage": "https://github.com/Changers/SDKWidgets#readme",
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "prettier": "^2.7.1",
+    "ts-loader": "^9.3.1",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.7.4",
+    "webpack-cli": "^4.10.0"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
