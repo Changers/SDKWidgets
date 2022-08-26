@@ -12,7 +12,8 @@
     "build": "webpack"
   },
   "dependencies": {
-    "lit": "^2.0.2"
+    "lit": "^2.0.2",
+    "sdkwidgets": "github:Changers/SDKWidgets#feature/open-widgets"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.4.17",
