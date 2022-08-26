@@ -1,10 +1,18 @@
-const { resolve } = require('path');
+const {resolve} = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
   mode: 'development',
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
   entry: {
     bundle: './hello-world.js',
     demo: './demo.js',
@@ -14,17 +22,19 @@ module.exports = {
     path: resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.js']
+    extensions: ['.js'],
   },
   devtool: 'source-map',
-  plugins: [new HtmlWebpackPlugin({
-    template: "./public/index.html"
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+  ],
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
     },
     compress: true,
-    port: 9000,
+    port: 9001,
   },
 };
