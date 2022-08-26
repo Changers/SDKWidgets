@@ -53,8 +53,10 @@ export const getUserAuth: GetUserAuth = async ({
   uuid,
   saveAuth = saveOauthInfo,
 }) => {
+  // tslint:disable-next-line:no-console
   console.info('Obtaining oauth client token..');
   const tokenResponse = await getClientToken({clientId, clientSecret, env});
+  // tslint:disable-next-line:no-console
   console.info('Got oauth client token');
 
   if (!tokenResponse?.data?.access_token) {
@@ -63,6 +65,7 @@ export const getUserAuth: GetUserAuth = async ({
 
   const clientToken = tokenResponse.data.access_token as string;
   if (uuid) {
+    // tslint:disable-next-line:no-console
     console.info(`Logging in with existing user ${uuid}`);
     const loginUserReponse = await loginUser({app, clientToken, uuid, env});
     if (!loginUserReponse?.data?.data) {
@@ -70,6 +73,7 @@ export const getUserAuth: GetUserAuth = async ({
     }
 
     const userToken = loginUserReponse?.data?.data?.token;
+    // tslint:disable-next-line:no-console
     console.info(`Logged in with user ${uuid}`);
 
     saveAuth({
@@ -83,15 +87,17 @@ export const getUserAuth: GetUserAuth = async ({
 
     return {userToken, uuid, app, clientId, clientSecret, clientToken};
   } else {
+    // tslint:disable-next-line:no-console
     console.info(`Creating new user..`);
     const createUserResponse = await createUser({app, clientToken, env});
     if (!createUserResponse?.data?.data) {
       return;
     }
 
-    const uuid = createUserResponse?.data?.data?.uuid;
-    const userToken = createUserResponse?.data?.data?.token;
+    // tslint:disable-next-line
+    const {uuid, token: userToken} = createUserResponse.data.data;
 
+    // tslint:disable-next-line:no-console
     console.info(`User created ${uuid}`);
 
     saveAuth({
@@ -164,7 +170,7 @@ export const loginUser = async ({app, clientToken, uuid, env}: LoginUser) => {
     },
   });
 
-  return client.post('login', {uuid: uuid});
+  return client.post('login', {uuid});
 };
 
 const saveOauthInfo = (data: UserAuth) => {
@@ -180,6 +186,7 @@ const saveOauthInfo = (data: UserAuth) => {
     try {
       parsedAuth = JSON.parse(existingAuth);
     } catch (e) {
+      // tslint:disable-next-line:no-console
       console.error(e);
     }
   }
