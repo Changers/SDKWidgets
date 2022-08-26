@@ -87,6 +87,7 @@ class OpenWidgets {
       this.initialized = true;
       this.setupCoreWidgets();
       this.setupCustomWidgets({widgets});
+      // tslint:disable-next-line:no-empty
     } catch (e) {}
   }
 
@@ -229,11 +230,11 @@ class OpenWidgets {
 
     const fullScreenClass = this.getClassname(`card--full-screen`);
 
-    const openFullScreen = ({title}: {title: string}) => {
+    const openFullScreen = ({title: fsTitle}: {title: string}) => {
       cardEl.classList.add(fullScreenClass);
       this.container.style.overflow = 'hidden';
 
-      fsTitleEl.textContent = title || '';
+      fsTitleEl.textContent = fsTitle || '';
     };
 
     const closeFullScreen = () => {
