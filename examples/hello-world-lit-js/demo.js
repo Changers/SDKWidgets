@@ -17,9 +17,9 @@ openWidgets.init({
       },
     ],
     authData: {
-      app: 'sintra',
-      clientId: 18,
-      clientSecret: 'Kzi4g7FcXc4y8J8l3gbiFQI3KTM1hKsGgwwvPtEZ',
+      app: 'sample',
+      clientId: 0,
+      clientSecret: '',
       env: 'stage'
     },
 });
