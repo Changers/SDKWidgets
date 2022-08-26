@@ -296,7 +296,7 @@ class OpenWidgets {
   }
 }
 
-const openWidgets = new OpenWidgets();
+export const openWidgets = new OpenWidgets();
 
 declare global {
   interface Window {
