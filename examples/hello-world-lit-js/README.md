@@ -1,6 +1,8 @@
 # Local development
 * `git clone https://github.com/Changers/SDKWidgets`
 * `cd examples/hello-world-lit-js`
+* `cp .env.example .env`
+* `vim .env` 
 * `npm install`
 * `npm run build`
 * `npm run start`

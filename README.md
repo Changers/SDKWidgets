@@ -13,8 +13,7 @@ In this repository, we will provide some example widgets, document the API inter
 
 Web components can be build using either pure javascript or using one of the many open source frameworks available. 
 
-In this repository we provide two example widgets:
-* [examples/hello-world-valila-js](examples/hello-world-valila-js) - Pure javascript
+In this repository we provide following example widgets:
 * [examples/hello-world-lit-js](examples/hello-world-lit-js) - Build with [Lit Elements](https://lit.dev/)
 
 Both the examples define a html tag called `hello-world`
