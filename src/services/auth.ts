@@ -125,7 +125,7 @@ export const userProfileToOpenWidgetUser = ({
   email: userProfile.user.email,
   firstname: userProfile.user.firstname,
   lastname: userProfile.user.lastname,
-  auth: userProfile.user.open_widgets.auth,
+  auth: userProfile.user.open_widgets?.auth,
 });
 
 interface GetClientToken {

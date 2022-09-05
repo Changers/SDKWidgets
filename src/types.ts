@@ -79,7 +79,7 @@ export type UserData = {
   email: string;
   firstname: string;
   lastname: string;
-  open_widgets: {
+  open_widgets?: {
     enable: boolean;
     auth?: {
       token: string;
