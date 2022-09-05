@@ -5,6 +5,7 @@ import {
   Env,
   GetUserProfile,
   UserAuth,
+  OpenWidgetUser,
 } from '../types';
 
 const domains: Record<Env, string> = {
@@ -112,6 +113,20 @@ export const getUserAuth: GetUserAuth = async ({
     return {userToken, uuid, app, clientId, clientSecret, clientToken};
   }
 };
+
+export const userProfileToOpenWidgetUser = ({
+  userProfile,
+}: {
+  userProfile: UserProfile;
+}): OpenWidgetUser => ({
+  id: userProfile.user.id,
+  coins: userProfile.user.recoins,
+  account_type: userProfile.user.account_type,
+  email: userProfile.user.email,
+  firstname: userProfile.user.firstname,
+  lastname: userProfile.user.lastname,
+  auth: userProfile.user.open_widgets.auth,
+});
 
 interface GetClientToken {
   clientId: number;

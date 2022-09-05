@@ -3,10 +3,9 @@ import {
   GetUser,
   OpenWidgetApi,
   OpenWidgetTheme,
-  OpenWidgetUser,
   UserProfile,
 } from './types';
-import {getUserProfile} from './services';
+import {getUserProfile, userProfileToOpenWidgetUser} from './services';
 
 const WRAPPER_CLASS = 'open-widgets';
 
@@ -133,14 +132,9 @@ class OpenWidgets {
     customElement: any;
     customWidget: WidgetCard;
   }) {
-    customElement.user = {
-      id: this.userProfile.user.id,
-      coins: this.userProfile.user.recoins,
-      account_type: this.userProfile.user.account_type,
-      email: this.userProfile.user.email,
-      firstname: this.userProfile.user.firstname,
-      lastname: this.userProfile.user.lastname,
-    } as OpenWidgetUser;
+    customElement.user = userProfileToOpenWidgetUser({
+      userProfile: this.userProfile,
+    });
 
     customElement.theme = this.getTheme();
 

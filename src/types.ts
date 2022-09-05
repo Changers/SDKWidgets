@@ -5,6 +5,9 @@ export type OpenWidgetUser = {
   email: string;
   firstname: string;
   lastname: string;
+  auth?: {
+    token: string;
+  };
 };
 
 export type OpenWidgetApi = {
@@ -76,6 +79,12 @@ export type UserData = {
   email: string;
   firstname: string;
   lastname: string;
+  open_widgets: {
+    enable: boolean;
+    auth?: {
+      token: string;
+    };
+  };
 };
 
 export type UserProfile = {
