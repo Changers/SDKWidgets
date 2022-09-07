@@ -29,6 +29,9 @@ type OpenWidgetUser = {
   email: string;
   firstname: string;
   lastname: string;
+  auth?: {
+    token: string;
+  };
 }
 ```
 * `api` is a javascript object of type `OpenWidgetApi` which contains set of functions you can use to communicate with host app.
