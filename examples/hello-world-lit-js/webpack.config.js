@@ -1,4 +1,5 @@
 const {resolve} = require('path');
+const Dotenv = require('dotenv-webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
@@ -14,7 +15,7 @@ module.exports = {
     ],
   },
   entry: {
-    bundle: './hello-world.js',
+    bundle: './widget.js',
     demo: './demo.js',
   },
   output: {
@@ -26,6 +27,7 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),

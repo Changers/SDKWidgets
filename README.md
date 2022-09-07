@@ -13,33 +13,72 @@ In this repository, we will provide some example widgets, document the API inter
 
 Web components can be build using either pure javascript or using one of the many open source frameworks available. 
 
-In this repository we provide two example widgets:
-* [examples/hello-world-valila-js](examples/hello-world-valila-js) - Pure javascript
+In this repository we provide following example widgets:
 * [examples/hello-world-lit-js](examples/hello-world-lit-js) - Build with [Lit Elements](https://lit.dev/)
-
-Both the examples define a html tag called `hello-world`
 
 ## Communicating with host app
 
-Host app provide two javascript objects as arguments to WebComponent html elements. 
-* `user` is a javascript object which contains basic user details such as user id, coin balance, etc
+Host app provide these javascript objects as arguments to WebComponent html elements. 
+* `user` is a javascript object of type `OpenWidgetUser` which contains basic user details such as user id, coin balance, etc
 
 ```
-type UserModel = {
+type OpenWidgetUser = {
   id: number;
   coins: number;
   account_type: number;
   email: string;
   firstname: string;
   lastname: string;
-};
+}
 ```
-* `api` is a javascript object of class `OpenWidgetApi` which contains set of functions you can use to communicate with host app.
+* `api` is a javascript object of type `OpenWidgetApi` which contains set of functions you can use to communicate with host app.
 
 ```
-interface OpenWidgetApiInterface {
-  getUser(): UserModel | undefined;
+type OpenWidgetApi = {
+  getUser(): OpenWidgetUser | undefined;
+  openFullScreen(data: {title: string}): void;
+  closeFullScreen(): void;
+  getCurrentLocation(): Promise<
+    | {
+        latitude: number;
+        longitude: number;
+      }
+    | undefined
+  >;
+  scanQRCode(): Promise<string | undefined>;
 }
+```
+
+* `theme` is a javascript object of type `OpenWidgetTheme` which contains css theme variables.
+
+```
+type OpenWidgetTheme = {
+  styles: {
+    font: {
+      primary: string;
+      secondary: string;
+    };
+    colors: {
+      primary: string;
+      secondary: string;
+    };
+    components: {
+      app: {navBgColor: string} & BaseComponent;
+      widget: {
+        title: BaseComponent;
+        body: BaseComponent;
+      };
+    };
+  };
+};
+
+type BaseComponent = {
+  textColor: string;
+  bgColor: string;
+  fontFamily: string;
+  fontSize: string;
+  fontWeight: string;
+};
 ```
 
 ## Bundling WebComponents
