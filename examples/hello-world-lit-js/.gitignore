@@ -20,5 +20,9 @@
 /dist/
 /out-tsc/
 
+# config
+.env
+
+# extra
 storybook-static
 custom-elements.json
