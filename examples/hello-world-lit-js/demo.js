@@ -13,6 +13,8 @@ openWidgets.init({
     app: process.env.APP,
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    env: process.env.ENV
+    env: process.env.ENV,
+    uuid: process.env.UUID,
   },
 });
+``

@@ -252,34 +252,34 @@ class OpenWidgets {
     return {
       styles: {
         font: {
-          primary: 'Roboto',
-          secondary: 'Adobe Sketchnote',
+          primary: 'Open Sans',
+          secondary: 'Open Sans',
         },
         colors: {
-          primary: '#007D8A',
-          secondary: '#C0E4E8',
+          primary: '#C0D9C2',
+          secondary: '#E0ECE1',
         },
         components: {
           app: {
             textColor: '#000000',
-            bgColor: '#C0E4E8',
-            navBgColor: '#007D8A',
-            fontFamily: 'Roboto',
+            bgColor: '#E0ECE1',
+            navBgColor: '#C0D9C2',
+            fontFamily: 'Open Sans',
             fontSize: '18px',
             fontWeight: '400',
           },
           widget: {
             title: {
               textColor: '#FFFFFF',
-              bgColor: '#30454A',
-              fontFamily: 'Adobe Sketchnote',
-              fontSize: '26px',
-              fontWeight: '500',
+              bgColor: '#000000',
+              fontFamily: 'Open Sans',
+              fontSize: '24px',
+              fontWeight: '600',
             },
             body: {
               textColor: '#000000',
               bgColor: '#FFFFFF',
-              fontFamily: 'Roboto',
+              fontFamily: 'Open Sans',
               fontSize: '18px',
               fontWeight: '400',
             },
