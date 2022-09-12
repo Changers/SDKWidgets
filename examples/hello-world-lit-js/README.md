@@ -1,3 +1,7 @@
+# Prerequisites 
+* NodeJs 14+
+* NPM 8+
+
 # Local development
 * `git clone https://github.com/Changers/SDKWidgets`
 * `cd SDKWidgets/examples/hello-world-lit-js`
