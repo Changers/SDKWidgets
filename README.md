@@ -52,6 +52,10 @@ type OpenWidgetApi = {
 }
 ```
 
+> :warning: During local development and testing from desktop web-browsers the following function will give dummy data - 
+> * getCurrentLocation()
+> * scanQRCode()
+
 * `theme` is a javascript object of type `OpenWidgetTheme` which contains css theme variables.
 
 ```
