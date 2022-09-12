@@ -6,7 +6,7 @@
 * `git clone https://github.com/Changers/SDKWidgets`
 * `cd SDKWidgets/examples/hello-world-lit-js`
 * `cp .env.example .env`
-* `vim .env` 
+* `vim .env` (Add env variables)
 * `npm install`
 * `npm run build`
 * `npm run start`
