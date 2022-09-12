@@ -10,6 +10,8 @@
 * `npm install`
 * `npm run build`
 * `npm run start`
+* Open http://localhost:9001/
+* Open console and wait a few seconds for it to load
 
 # Testing inside app
 * Open `https://sdk.maroshi.de/` in browser
