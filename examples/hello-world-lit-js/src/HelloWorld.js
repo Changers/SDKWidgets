@@ -65,7 +65,7 @@ export class HelloWorld extends LitElement {
     console.log('QR Code: ', qrCode);
   }
 
-  async __openNewWidget() {
+  __openNewWidget() {
     const opened = this.api.openNewWidget({
       name: this.newWidgetName,
       data: {
@@ -75,7 +75,7 @@ export class HelloWorld extends LitElement {
     console.log('Opened new widget: ', opened);
   }
 
-  async __setTitle() {
+  __setTitle() {
     this.api.setTitle({title: this.widgetTitle});
   }
 
