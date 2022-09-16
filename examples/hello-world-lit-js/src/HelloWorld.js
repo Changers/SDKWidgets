@@ -75,7 +75,7 @@ export class HelloWorld extends LitElement {
     console.log('Opened new widget: ', opened);
   }
 
-  async __title() {
+  async __setTitle() {
     this.api.setTitle({title: this.widgetTitle});
   }
 
@@ -92,7 +92,7 @@ export class HelloWorld extends LitElement {
       <button @click="${this.__getLocation}">Get Location</button>
       <button @click="${this.__getQrCode}">Get QR Code</button>
       <button @click="${this.__openNewWidget}">Open new widget</button>
-      <button @click="${this.__title}">Set widget title</button>
+      <button @click="${this.__setTitle}">Set widget title</button>
     `;
   }
 }
