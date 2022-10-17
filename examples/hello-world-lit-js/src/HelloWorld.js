@@ -1,6 +1,9 @@
-import { html, css, LitElement } from 'lit';
+import {html, css, LitElement} from 'lit';
 
 export class HelloWorld extends LitElement {
+  widgetTitle = 'Hello world';
+  newWidgetName = 'hello-world-new';
+
   static get styles() {
     return css`
       :host {
@@ -13,37 +16,41 @@ export class HelloWorld extends LitElement {
 
   static get properties() {
     return {
-      counter: { type: Number },
-      user: {type: Object },
+      counter: {type: Number},
+      user: {type: Object},
       api: {type: Object},
-      theme: {type: Object}
+      theme: {type: Object},
+      data: {type: Object},
     };
   }
 
   constructor() {
     super();
     this.counter = 5;
-    this.user = {}
-    this.theme = {}
-    this.api = {}
+    this.user = {};
+    this.theme = {};
+    this.api = {};
+    this.data = {};
   }
 
   __increment() {
     this.counter += 1;
 
-    console.log("increment", this.api, this.user, this.counter)
+    console.log('increment', this.api, this.user, this.counter);
 
-    console.log("api", this.api)
+    console.log('api', this.api);
 
-    console.log("theme", this.theme)
+    console.log('theme', this.theme);
+
+    console.log('data', this.data);
   }
 
   __fullScreen() {
-    this.api.openFullScreen({title: 'Full screen title'})
+    this.api.openFullScreen({title: 'Full screen title'});
   }
 
   __closeFullScreen() {
-    this.api.closeFullScreen()
+    this.api.closeFullScreen();
   }
 
   async __getLocation() {
@@ -58,20 +65,34 @@ export class HelloWorld extends LitElement {
     console.log('QR Code: ', qrCode);
   }
 
+  __openNewWidget() {
+    const opened = this.api.openNewWidget({
+      name: this.newWidgetName,
+      data: {
+        some: 'data',
+      },
+    });
+    console.log('Opened new widget: ', opened);
+  }
+
+  __setTitle() {
+    this.api.setTitle({title: this.widgetTitle});
+  }
+
   render() {
-    if (!this.user || !this.user.id)
-      return html`<div>Empty User</div>`;
+    if (!this.user || !this.user.id) return html` <div>Empty User</div>`;
 
     return html`
       <h2>Hello, User #${this.user.id}!</h2>
       <h5>Balance: ${this.user.coins}!</h5>
       <h5>Counter: ${this.counter}!</h5>
-      <button @click=${this.__increment}>Increment</button>
-      <button @click=${this.__fullScreen}>Full Screen</button>
-      <button @click=${this.__closeFullScreen}>Close Full Screen</button>
-      <button @click=${this.__getLocation}>Get Location</button>
-      <button @click=${this.__getQrCode}>Get QR Code</button>
+      <button @click="${this.__increment}">Increment</button>
+      <button @click="${this.__fullScreen}">Full Screen</button>
+      <button @click="${this.__closeFullScreen}">Close Full Screen</button>
+      <button @click="${this.__getLocation}">Get Location</button>
+      <button @click="${this.__getQrCode}">Get QR Code</button>
+      <button @click="${this.__openNewWidget}">Open new widget</button>
+      <button @click="${this.__setTitle}">Set widget title</button>
     `;
   }
 }
-

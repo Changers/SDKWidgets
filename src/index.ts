@@ -2,6 +2,7 @@ import {
   CustomWidget,
   GetUser,
   OpenWidgetApi,
+  OpenWidgetProps,
   OpenWidgetTheme,
   UserProfile,
 } from './types';
@@ -21,6 +22,15 @@ type WidgetCard = {
   contentEl: HTMLElement;
   openFullScreen: (data: {title: string}) => void;
   closeFullScreen: () => void;
+  openNewWidget: ({widget}: {widget: LoadedCustomWidget}) => void;
+  removeSelf: () => void;
+};
+
+type CustomElement = HTMLElement & OpenWidgetProps;
+
+type LoadedCustomWidget = CustomWidget & {
+  widgetCard: WidgetCard;
+  customElement: CustomElement;
 };
 
 class OpenWidgets {
@@ -58,6 +68,7 @@ class OpenWidgets {
       title: `Your contribution ${new Date().getFullYear()}`,
     },
   ];
+  customWidgets: LoadedCustomWidget[] = [];
 
   async init({
     root,
@@ -91,32 +102,57 @@ class OpenWidgets {
   }
 
   setupCustomWidgets({widgets}: {widgets: CustomWidget[]}) {
-    widgets.forEach((widget) => {
-      this.renderCustomWidget({widget});
-    });
+    this.customWidgets = widgets
+      .map((widget) => {
+        return this.renderCustomWidget({widget});
+      })
+      .filter((widget): widget is LoadedCustomWidget => !!widget);
   }
 
-  renderCustomWidget({widget}: {widget: CustomWidget}) {
-    const positionId = widget.position.replace('after-', '');
+  renderCustomWidget({
+    widget,
+    fullScreenMode,
+    data,
+  }: {
+    widget: CustomWidget;
+    fullScreenMode?: boolean;
+    data?: object;
+  }): LoadedCustomWidget | undefined {
+    const positionId = widget.position
+      ? widget.position.replace('after-', '')
+      : 'none';
     const positionWidget = this.coreWidgets.find(
       (coreWidget) => coreWidget.id === positionId,
     );
-    if (!positionWidget) {
+    if (widget.position && !positionWidget) {
       // tslint:disable-next-line:no-console
       console.warn(`Invalid widget position: ${widget.position}`);
-      return;
     }
 
     try {
-      const customWidget = this.getWidgetCard({});
+      const widgetCard = this.getWidgetCard({fullScreenMode});
       const CustomElement = customElements.get(widget.name);
       // @ts-ignore
-      const customElement = new CustomElement();
-      this.setupCustomElement({customElement, customWidget});
+      const customElement = new CustomElement() as CustomElement;
+      this.setupCustomElement({
+        customElement,
+        widgetCard,
+        fullScreenMode,
+        data,
+      });
 
-      customWidget.contentEl.appendChild(customElement);
+      widgetCard.contentEl.appendChild(customElement);
 
-      positionWidget.el!.after(customWidget.el);
+      if (positionWidget) {
+        positionWidget.el!.after(widgetCard.el);
+      }
+
+      return {
+        name: widget.name,
+        position: widget.position,
+        widgetCard,
+        customElement,
+      };
     } catch (e) {
       // tslint:disable-next-line:no-console
       console.warn(`Invalid widget`, widget);
@@ -127,11 +163,19 @@ class OpenWidgets {
 
   setupCustomElement({
     customElement,
-    customWidget,
+    widgetCard,
+    fullScreenMode,
+    data,
   }: {
-    customElement: any;
-    customWidget: WidgetCard;
+    customElement: CustomElement;
+    widgetCard: WidgetCard;
+    fullScreenMode?: boolean;
+    data?: object;
   }) {
+    const parent = this;
+    let isFullScreen = false;
+    let appTitle = '';
+
     customElement.user = userProfileToOpenWidgetUser({
       userProfile: this.userProfile,
     });
@@ -144,11 +188,43 @@ class OpenWidgets {
       },
 
       openFullScreen({title}) {
-        customWidget.openFullScreen({title});
+        isFullScreen = true;
+        widgetCard.openFullScreen({title: appTitle || title});
       },
 
       closeFullScreen() {
-        customWidget.closeFullScreen();
+        widgetCard.closeFullScreen();
+
+        if (fullScreenMode) {
+          widgetCard.removeSelf();
+        }
+      },
+
+      setTitle({title}: {title: string}) {
+        appTitle = title;
+
+        if (isFullScreen) {
+          this.openFullScreen({title});
+        }
+      },
+
+      openNewWidget({name, data}) {
+        const newWidget = parent.renderCustomWidget({
+          widget: {
+            name,
+          },
+          fullScreenMode: true,
+          data,
+        });
+        if (!newWidget) {
+          return false;
+        }
+
+        widgetCard.openNewWidget({
+          widget: newWidget,
+        });
+
+        return true;
       },
 
       getCurrentLocation() {
@@ -164,6 +240,14 @@ class OpenWidgets {
         return new Promise((resolve) => resolve('https://changers.com'));
       },
     } as OpenWidgetApi;
+
+    if (data) {
+      customElement.data = data;
+    }
+
+    if (fullScreenMode) {
+      customElement.api.openFullScreen({title: ''});
+    }
   }
 
   setupCoreWidgets() {
@@ -185,7 +269,17 @@ class OpenWidgets {
     this.root.appendChild(openWidgetsEl);
   }
 
-  getWidgetCard({title, id}: {id?: string; title?: string}): WidgetCard {
+  getWidgetCard({
+    title,
+    id,
+    fullScreenMode,
+  }: {
+    id?: string;
+    title?: string;
+    fullScreenMode?: boolean;
+  }): WidgetCard {
+    let openedWidget: LoadedCustomWidget;
+
     const cardEl = document.createElement('div');
     cardEl.className = this.getClassname('card');
 
@@ -234,6 +328,23 @@ class OpenWidgets {
     const closeFullScreen = () => {
       cardEl.classList.remove(fullScreenClass);
       this.container.style.overflowY = 'scroll';
+
+      if (fullScreenMode) {
+        cardEl.remove();
+      }
+    };
+
+    const removeSelf = () => {
+      cardEl.remove();
+    };
+
+    const openNewWidget = ({widget}: {widget: LoadedCustomWidget}) => {
+      if (openedWidget) {
+        openedWidget.widgetCard.el.remove();
+      }
+
+      openedWidget = widget;
+      cardEl.parentNode?.insertBefore(widget.widgetCard.el, cardEl.nextSibling);
     };
 
     return {
@@ -241,6 +352,8 @@ class OpenWidgets {
       contentEl,
       openFullScreen,
       closeFullScreen,
+      openNewWidget,
+      removeSelf,
     };
   }
 

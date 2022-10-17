@@ -12,8 +12,10 @@ export type OpenWidgetUser = {
 
 export type OpenWidgetApi = {
   getUser(): OpenWidgetUser | undefined;
-  openFullScreen(data: {title: string}): void;
+  setTitle({title}: {title: string}): void;
+  openFullScreen({title}: {title: string}): void;
   closeFullScreen(): void;
+  openNewWidget({name, data}: {name: string; data: object}): boolean;
   getCurrentLocation(): Promise<
     | {
         latitude: number;
@@ -56,6 +58,7 @@ export type OpenWidgetProps = {
   user: OpenWidgetUser;
   api: OpenWidgetApi;
   theme?: OpenWidgetTheme;
+  data?: object;
 };
 
 export type OpenWidgetPosition =
@@ -69,7 +72,7 @@ export type OpenWidgetPosition =
 
 export type CustomWidget = {
   name: string;
-  position: OpenWidgetPosition;
+  position?: OpenWidgetPosition;
 };
 
 export type UserData = {

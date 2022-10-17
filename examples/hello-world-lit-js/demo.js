@@ -17,4 +17,3 @@ openWidgets.init({
     uuid: process.env.UUID,
   },
 });
-``

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang='en-GB'>
+<head>
+  <meta charset='utf-8'>
+  <style>
+      body {
+          background: #fafafa;
+      }
+  </style>
+  <script src='./config.js'></script>
+  <script src='./hello-world.js'></script>
+  <link href='../../dist/open-widgets.css' rel='stylesheet'>
+  <script src='../../dist/open-widgets.js'></script>
+</head>
+<body>
+<div id='root'></div>
+</body>
+<script>
+  window.openWidgets.init({
+    root: document.getElementById('root'),
+    widgets: [
+      {
+        name: 'hello-world',
+        position: 'after-tree-planting',
+      },
+      {
+        name: 'hello-world',
+        position: 'after-token',
+      },
+      {
+        name: 'hello-world-new',
+      },
+    ],
+    authData: {
+      app: 'sdksample',
+      clientId: 19,
+      clientSecret: 'secret',
+      env: 'stage',
+      uuid: 'uuid',
+      ...config?.authData || {},
+    },
+  });
+</script>
+</html>
