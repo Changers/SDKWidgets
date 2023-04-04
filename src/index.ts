@@ -114,7 +114,7 @@ class OpenWidgets {
       const customElement = new CustomElement();
 
       const customWidget = this.getWidgetCard({}, customElement);
-      
+
       this.setupCustomElement({customElement, customWidget});
 
       customWidget.contentEl.appendChild(customElement);
@@ -142,7 +142,7 @@ class OpenWidgets {
     customElement.theme = this.getTheme();
 
     customElement.fullscreen = false;
-    
+
     customElement.api = {
       getUser() {
         return customElement.user;
@@ -190,7 +190,10 @@ class OpenWidgets {
     this.root.appendChild(openWidgetsEl);
   }
 
-  getWidgetCard({title, id}: {id?: string; title?: string}, customElement: any): WidgetCard {
+  getWidgetCard(
+    {title, id}: {id?: string; title?: string},
+    customElement: any,
+  ): WidgetCard {
     const cardEl = document.createElement('div');
     cardEl.className = this.getClassname('card');
 
