@@ -19,6 +19,16 @@ In this repository we provide following example widgets:
 ## Communicating with host app
 
 Host app provide these javascript objects as arguments to WebComponent html elements. 
+
+```
+type OpenWidgetProps = {
+  user: OpenWidgetUser;
+  api: OpenWidgetApi;
+  theme: OpenWidgetTheme;
+  fullscreen: boolean;
+};
+```
+
 * `user` is a javascript object of type `OpenWidgetUser` which contains basic user details such as user id, coin balance, etc
 
 ```
@@ -88,6 +98,8 @@ type BaseComponent = {
 };
 ```
 
+* `fullscreen` is a javascript boolean value 
+
 ## Bundling WebComponents
 We require a single javascript file, which contains web component class. The JS file should also register the given component. For example using pure javascript: 
 ```
@@ -138,6 +150,7 @@ registerWidget('hello-world', 'http://127.0.0.1:8082/hello-world.js', 'after-tok
         * `after-co2-savings`
         * `after-team-leaderboards`
         * `after-invite-friends`
+
 
 
 

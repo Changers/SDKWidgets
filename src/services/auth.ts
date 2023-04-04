@@ -9,6 +9,7 @@ import {
 } from '../types';
 
 const domains: Record<Env, string> = {
+  local: 'changersdev.test',
   development: 'changersdev.de',
   stage: 'maroshi.de',
   production: 'changers.com',
