@@ -16,7 +16,8 @@ export class HelloWorld extends LitElement {
       counter: { type: Number },
       user: {type: Object },
       api: {type: Object},
-      theme: {type: Object}
+      theme: {type: Object},
+      fullscreen: {type: Boolean}
     };
   }
 
@@ -66,11 +67,13 @@ export class HelloWorld extends LitElement {
       <h2>Hello, User #${this.user.id}!</h2>
       <h5>Balance: ${this.user.coins}!</h5>
       <h5>Counter: ${this.counter}!</h5>
+      <h5>Fullscreen: ${this.fullscreen}!</h5>
       <button @click=${this.__increment}>Increment</button>
       <button @click=${this.__fullScreen}>Full Screen</button>
       <button @click=${this.__closeFullScreen}>Close Full Screen</button>
       <button @click=${this.__getLocation}>Get Location</button>
       <button @click=${this.__getQrCode}>Get QR Code</button>
+
     `;
   }
 }
