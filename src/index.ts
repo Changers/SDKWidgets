@@ -108,10 +108,13 @@ class OpenWidgets {
     }
 
     try {
-      const customWidget = this.getWidgetCard({});
       const CustomElement = customElements.get(widget.name);
+
       // @ts-ignore
       const customElement = new CustomElement();
+
+      const customWidget = this.getWidgetCard({}, customElement);
+      
       this.setupCustomElement({customElement, customWidget});
 
       customWidget.contentEl.appendChild(customElement);
@@ -138,6 +141,8 @@ class OpenWidgets {
 
     customElement.theme = this.getTheme();
 
+    customElement.fullscreen = false;
+    
     customElement.api = {
       getUser() {
         return customElement.user;
@@ -174,7 +179,7 @@ class OpenWidgets {
     this.container.className = this.getClassname('container');
 
     this.coreWidgets.forEach((widget) => {
-      const {el, contentEl} = this.getWidgetCard(widget);
+      const {el, contentEl} = this.getWidgetCard(widget, {});
       widget.el = el;
       widget.contentEl = contentEl;
 
@@ -185,7 +190,7 @@ class OpenWidgets {
     this.root.appendChild(openWidgetsEl);
   }
 
-  getWidgetCard({title, id}: {id?: string; title?: string}): WidgetCard {
+  getWidgetCard({title, id}: {id?: string; title?: string}, customElement: any): WidgetCard {
     const cardEl = document.createElement('div');
     cardEl.className = this.getClassname('card');
 
@@ -229,11 +234,15 @@ class OpenWidgets {
       this.container.style.overflow = 'hidden';
 
       fsTitleEl.textContent = fsTitle || '';
+
+      customElement.fullscreen = true;
     };
 
     const closeFullScreen = () => {
       cardEl.classList.remove(fullScreenClass);
       this.container.style.overflowY = 'scroll';
+
+      customElement.fullscreen = false;
     };
 
     return {

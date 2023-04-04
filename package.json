@@ -1,6 +1,6 @@
 {
   "name": "sdkwidgets",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "Changers City SDK allows partners to build their own interactive UI widgets which can be embedded inside  Changers City app.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
