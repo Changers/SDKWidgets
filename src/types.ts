@@ -56,6 +56,7 @@ export type OpenWidgetProps = {
   user: OpenWidgetUser;
   api: OpenWidgetApi;
   theme?: OpenWidgetTheme;
+  fullscreen: boolean;
 };
 
 export type OpenWidgetPosition =
@@ -110,7 +111,7 @@ export type InitWidgets = (
   uuid?: string,
 ) => void;
 
-export type Env = 'development' | 'stage' | 'production';
+export type Env = 'development' | 'stage' | 'production' | 'local';
 
 export type GetUser = {
   app: string;
