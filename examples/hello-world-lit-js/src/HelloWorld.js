@@ -65,9 +65,9 @@ export class HelloWorld extends LitElement {
 
     return html`
       <h2>Hello, User #${this.user.id}!</h2>
-      <h5>Balance: ${this.user.coins}!</h5>
-      <h5>Counter: ${this.counter}!</h5>
-      <h5>Fullscreen: ${this.fullscreen}!</h5>
+      <h5>Balance: ${this.user.coins}</h5>
+      <h5>Counter: ${this.counter}</h5>
+      <h5>Fullscreen: ${this.fullscreen}</h5>
       <button @click=${this.__increment}>Increment</button>
       <button @click=${this.__fullScreen}>Full Screen</button>
       <button @click=${this.__closeFullScreen}>Close Full Screen</button>
